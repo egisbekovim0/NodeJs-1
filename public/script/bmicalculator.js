@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
-    const resultContainer = document.getElementById('result-container');
-    const bmiResultElement = document.getElementById('bmi-result');
-    const interpretationElement = document.getElementById('interpretation');
+    const resultDiv = document.getElementById('resultHere');
+    const BMI= document.getElementById('bmi-score');
+    const DescriptionOfBmi = document.getElementById('description');
   
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
   
       try {
-        // Make a POST request to the server with form data
+
         const response = await fetch('/bmicalculator', {
           method: 'POST',
           headers: {
@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
         const result = await response.json();
   
-        // Display the BMI result and interpretation
-        bmiResultElement.textContent = `BMI: ${result.bmiResult}`;
-        interpretationElement.textContent = `Interpretation: ${result.interpretation}`;
-        resultContainer.style.display = 'block'; // Show the result container
+
+        BMI.textContent = `BMI: ${result.bmiResult}`;
+        DescriptionOfBmi.textContent = `Description: ${result.descriptionOfBMI}`;
+        resultDiv.style.display = 'block'; 
       } catch (error) {
         console.error('Error:', error.message);
       }
